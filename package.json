@@ -3,13 +3,8 @@
   "version": "1.0.0",
   "description": "api rest",
   "main": "index.js",
-<<<<<<< HEAD
   "repository": "https://github.com/IanIori/js-pi-4sem-api",
   "author": "Galera>",
-=======
-  "repository": "https://github.com/felipez3r0/workshop-node-ts-intro.git",
-  "author": "Felipe do E. Santo <felipez3r0@gmail.com>",
->>>>>>> 89a4167b452798346fec3a53b11f50af96033edc
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -26,22 +21,14 @@
   },
   "scripts": {
     "dev": "nodemon --exec ts-node-dev src/server.ts",
-<<<<<<< HEAD
-    "build": "tsc",
-    "start": "node ./dist/server.js"
-=======
     "build": "tsc"
->>>>>>> 89a4167b452798346fec3a53b11f50af96033edc
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^20.4.4",
     "nodemon": "^3.0.1",
     "ts-node-dev": "^2.0.0",
-<<<<<<< HEAD
     "typescript": "^5.4.5"
-=======
-    "typescript": "^5.1.6"
->>>>>>> 89a4167b452798346fec3a53b11f50af96033edc
+
   }
 }
