@@ -18,6 +18,6 @@ export default class Cargo extends BaseEntity {
   @Column()
   status!: string
 
-  @ManyToOne(() => User, user => user.tasks)
+  @ManyToOne(() => User, user => user.cargos)
   driver!: User  
 }

@@ -1,6 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany, Unique } from 'typeorm'
 import Token from './token.entity'
-import Task from './task.entity'
+import Cargo from './cargo.entity'
 
 @Entity()
 @Unique(["email"])
@@ -20,6 +20,6 @@ export default class User extends BaseEntity {
   @OneToMany(() => Token, token => token.user)
   tokens!: Token[]  
 
-  @OneToMany(() => Task, task => task.user)
-  tasks!: Task[]  
+  @OneToMany(() => Cargo, cargo => cargo.driver)
+  cargos!: Cargo[]  
 }
