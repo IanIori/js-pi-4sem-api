@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var auth_middleware_1 = require("../../middlewares/auth.middleware");
+var cargo_controller_1 = require("../../controllers/cargo/cargo.controller");
+var cargoRoutes = (0, express_1.Router)();
+cargoRoutes.post('/', auth_middleware_1.default, cargo_controller_1.default.store);
+cargoRoutes.get('/', auth_middleware_1.default, cargo_controller_1.default.index);
+cargoRoutes.get('/:id', auth_middleware_1.default, cargo_controller_1.default.show);
+cargoRoutes.delete('/:id', auth_middleware_1.default, cargo_controller_1.default.delete);
+cargoRoutes.put('/:id', auth_middleware_1.default, cargo_controller_1.default.update);
+exports.default = cargoRoutes;
