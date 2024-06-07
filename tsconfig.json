@@ -25,11 +25,8 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 
     /* Modules */
-<<<<<<< HEAD
-    "module": "CommonJS",                                /* Specify what module code is generated. */
-=======
+
     "module": "commonjs",                                /* Specify what module code is generated. */
->>>>>>> 89a4167b452798346fec3a53b11f50af96033edc
     "rootDir": "./src",                                  /* Specify the root folder within your source files. */
     // "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
