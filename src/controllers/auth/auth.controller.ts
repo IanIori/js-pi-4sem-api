@@ -5,42 +5,44 @@ import bcrypt from 'bcrypt'
 
 export default class AuthController {
   static async store (req: Request, res: Response) {
-    const { name, email, password } = req.body
+    const { nome, cpf, email, senha, confirmeSenha } = req.body
 
-    if (!name) return res.status(400).json({ error: 'O nome é obrigatório' })
+    if (!nome) return res.status(400).json({ error: 'O nome é obrigatório' })
     if (!email) return res.status(400).json({ error: 'O email é obrigatório' })
-    if (!password) return res.status(400).json({ error: 'A senha é obrigatória' })
+    if (!cpf) return res.status(400).json({ error: 'O cpf é obrigatório' })
+    if (!senha) return res.status(400).json({ error: 'A senha é obrigatória' })
+    if (senha != confirmeSenha) return res.status(400).json({ error: 'A confirmação está incorreta' })  
 
     // Verifica se o email já está cadastrado
     const userCheck = await User.findOneBy({ email })
     if (userCheck) return res.status(400).json({ error: 'Email já cadastrado' })
 
     const user = new User()
-    user.name = name
+    user.nome = nome
     user.email = email
     // Gera a hash da senha com bcrypt - para não salvar a senha em texto puro
-    user.password = bcrypt.hashSync(password, 10)
+    user.senha = bcrypt.hashSync(senha, 10)
     await user.save()
 
     // Não vamos retornar a hash da senha
     return res.status(201).json({
       id: user.id,
-      name: user.name,
+      nome: user.nome,
       email: user.email
     })
   }
 
   static async login (req: Request, res: Response) {
-    const { email, password } = req.body
+    const { email, senha } = req.body
 
     if (!email) return res.status(400).json({ error: 'O email é obrigatório' })
-    if (!password) return res.status(400).json({ error: 'A senha é obrigatória' })
+    if (!senha) return res.status(400).json({ error: 'A senha é obrigatória' })
 
     const user = await User.findOneBy({ email })
     if (!user) return res.status(401).json({ error: 'Usuário não encontrado' })
 
-    const passwordMatch = bcrypt.compareSync(password, user.password)
-    if (!passwordMatch) return res.status(401).json({ error: 'Senha inválida' })
+    const senhaMatch = bcrypt.compareSync(senha, user.senha)
+    if (!senhaMatch) return res.status(401).json({ error: 'Senha inválida' })
 
     // Remove todos os tokens antigos do usuário
     await Token.delete(

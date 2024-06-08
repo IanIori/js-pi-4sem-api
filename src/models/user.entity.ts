@@ -9,13 +9,16 @@ export default class User extends BaseEntity {
   id!: number
 
   @Column()
-  name!: string
+  nome!: string
+
+  @Column()
+  cpf!: string
 
   @Column()
   email!: string
 
   @Column()
-  password!: string
+  senha!: string
 
   @OneToMany(() => Token, token => token.user)
   tokens!: Token[]  
