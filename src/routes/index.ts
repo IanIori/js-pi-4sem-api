@@ -4,7 +4,7 @@ import cargoRoutes from './cargo/cargo.routes'
 
 const routes = Router()
 
-routes.use('/cargo', cargoRoutes)
+routes.use('/carga', cargoRoutes)
 routes.use('/auth', authRoutes)
 
 export default routes

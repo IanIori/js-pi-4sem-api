@@ -5,7 +5,7 @@ export default class CargoController {
   static async store (req: Request, res: Response) {
     const { specs, weight, status } = req.body
     const { userId } = req.headers
-
+    
     if (!userId) return res.status(401).json({ error: 'Usuário não autenticado' })
 
     if (!specs) {
