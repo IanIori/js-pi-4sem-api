@@ -30,7 +30,9 @@ export default class AuthController {
     return res.status(201).json({
       id: user.id,
       nome: user.nome,
-      email: user.email
+      cpf: user.cpf,
+      email: user.email,
+      senha: user.senha
     })
   }
 
