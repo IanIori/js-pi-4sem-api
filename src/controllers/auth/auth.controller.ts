@@ -19,7 +19,9 @@ export default class AuthController {
 
     const user = new User()
     user.nome = nome
+    user.cpf = cpf
     user.email = email
+    user.senha = senha
     // Gera a hash da senha com bcrypt - para não salvar a senha em texto puro
     user.senha = bcrypt.hashSync(senha, 10)
     await user.save()
