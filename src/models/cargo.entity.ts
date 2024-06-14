@@ -1,5 +1,6 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import User from './user.entity'
+import Checklist from './checklist.entity'
 
 @Entity()
 export default class Cargo extends BaseEntity {
@@ -19,5 +20,8 @@ export default class Cargo extends BaseEntity {
   status!: string
 
   @ManyToOne(() => User, user => user.cargos)
-  driver!: User  
+  driver!: User 
+  
+  @OneToMany(() => Checklist, checklist => checklist.carga)
+  checklists!: Checklist[]
 }
