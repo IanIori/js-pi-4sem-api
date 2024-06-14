@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import User from '../../models/user.entity'
 import Token from '../../models/token.entity'
 import bcrypt from 'bcrypt'
+import Newsletter from '../../models/news.entity'
 
 export default class AuthController {
   static async store (req: Request, res: Response) {
@@ -119,5 +120,21 @@ export default class AuthController {
 
     // Retorna uma resposta vazia
     return res.status(204).json()
+  }
+
+  static async subscribeNewsletter(req: Request, res: Response) {
+    const { email } = req.body;
+
+    if (!email) return res.status(400).json({ error: 'O email é obrigatório' });
+
+    // Verifica se o email já está inscrito
+    const emailCheck = await Newsletter.findOneBy({ email });
+    if (emailCheck) return res.status(400).json({ error: 'Email já inscrito' });
+
+    const newsletter = new Newsletter();
+    newsletter.email = email;
+    await newsletter.save();
+
+    return res.status(201).json({ message: 'Inscrição realizada com sucesso' });
   }
 }
