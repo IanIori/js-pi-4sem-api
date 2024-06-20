@@ -128,8 +128,8 @@ export default class AuthController {
     if (!email) return res.status(400).json({ error: 'O email é obrigatório' });
 
     // Verifica se o email já está inscrito
-    const emailCheck = await Newsletter.findOneBy({ email });
-    if (emailCheck) return res.status(400).json({ error: 'Email já inscrito' });
+    const userCheck = await User.findOneBy({ email })
+    if (userCheck) return res.status(400).json({ error: 'Email já cadastrado' })
 
     const newsletter = new Newsletter();
     newsletter.email = email;
