@@ -2,7 +2,6 @@ import { Request, Response } from 'express'
 import Checklist from '../../models/checklist.entity'
 import User from '../../models/user.entity'
 import Cargo from '../../models/cargo.entity'
-import Attachment from '../../models/attachment.entity'
 
 export default class ChecklistController {
   static async store (req: Request, res: Response) {
@@ -32,15 +31,6 @@ export default class ChecklistController {
     checklist.observations = observations
     checklist.carga = carga
     checklist.driver = user
-
-    if (attachments && attachments.length > 0) {
-      checklist.attachments = attachments.map((attachment: any) => {
-        const newAttachment = new Attachment()
-        newAttachment.filename = attachment.filename
-        newAttachment.data = Buffer.from(attachment.data, 'base64')
-        return newAttachment
-      })
-    }
 
     await checklist.save()
     return res.status(201).json(checklist)
@@ -129,15 +119,6 @@ export default class ChecklistController {
     checklist.painting = painting ?? checklist.painting
     checklist.glasses = glasses ?? checklist.glasses
     checklist.observations = observations ?? checklist.observations
-
-    if (attachments && attachments.length > 0) {
-      checklist.attachments = attachments.map((attachment: any) => {
-        const newAttachment = new Attachment()
-        newAttachment.filename = attachment.filename
-        newAttachment.data = Buffer.from(attachment.data, 'base64')
-        return newAttachment
-      })
-    }
 
     await checklist.save()
     return res.json(checklist)
